@@ -71,7 +71,7 @@
 
     window.addEventListener('mousemove', function(event){
         mousePosition.x = event.pageX
-        mousePosition.y = event.pagey
+        mousePosition.y = event.pageY
     })
 
     function draw(){
@@ -96,18 +96,26 @@
             let ball = document.createElement('div')
             ball.classList.add('ball')
             ball.style = style
+            
+          
+            ball.addEventListener('animationend', function(event){
+                event.target.remove()
+            })
 
-            ball.addEventListener(e){
-                e.target.remove()
-            }
-
-            ball.appendChild(container)
+        
+            container.appendChild(ball)
 
 
-            }, 500)
+            }, 1)
         }
 
-    window.addEventListener('mouseover' , draw())
+    window.addEventListener('mouseover' , function(){
+        drawId = draw()
+    })
+
+    window.addEventListener('mouseout' , function(){
+        clearInterval(drawId)
+    })
 </script>
 
 </html>
