@@ -85,15 +85,28 @@
 
 <script>
     let characters = []
-    let list = document.querySelector('list')
+    let list = document.getElementById('list')
+    let search = document.querySelector('input')
     fetch('https://www.swapi.co/api/people')
         .then(response => response.json())
         .then(response => characters.push(...response.results))
 
-        function render(){
-            let html = characters.map(val => `<li>${val.name}</li>`).join('')
+        function filterText(){
+            let filtered = characters
+            .filter(val => val.name.toLowerCase().includes(this.value.toLowerCase()))
+            .map(val => `<li>${val.name}</li>`)
+
+            if (filtered.length){
+            render(filtered)
+            }
+
+        }
+        function render(array){
+            let html = array.join('')
             list.innerHTML = html
         }
+
+        search.addEventListener('keyup', filterText)
 </script>
 
 </html>
