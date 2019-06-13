@@ -84,6 +84,16 @@
 </body>
 
 <script>
+    let characters = []
+    let list = document.querySelector('list')
+    fetch('https://www.swapi.co/api/people')
+        .then(response => response.json())
+        .then(response => characters.push(...response.results))
+
+        function render(){
+            let html = characters.map(val => `<li>${val.name}</li>`).join('')
+            list.innerHTML = html
+        }
 </script>
 
 </html>
